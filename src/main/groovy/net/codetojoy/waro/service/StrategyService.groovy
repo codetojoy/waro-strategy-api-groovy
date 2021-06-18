@@ -1,22 +1,13 @@
-package net.codetojoy.waro.service;
+package net.codetojoy.waro.service
 
-import java.util.Date;
-import java.util.List;
-import java.util.stream.IntStream;
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import net.codetojoy.waro.exceptions.StrategyException;
-import net.codetojoy.waro.entity.Result;
-import net.codetojoy.waro.strategy.Strategies;
-import net.codetojoy.waro.strategy.Strategy;
+import net.codetojoy.waro.exceptions.StrategyException
+import net.codetojoy.waro.entity.Result
+import net.codetojoy.waro.strategy.Strategies
+import net.codetojoy.waro.strategy.Strategy
 
 @RestController
 @RequestMapping("/waro")
@@ -34,30 +25,25 @@ class StrategyService {
 
         if (delayInSeconds != null) {
             try {
-                System.out.println("TRACER pathological delay: " + delayInSeconds + " sec");
-                Thread.sleep(delayInSeconds * 1000);
+                System.out.println("TRACER pathological delay: " + delayInSeconds + " sec")
+                Thread.sleep(delayInSeconds * 1000)
             } catch (Exception ex) {
             }
         }
 
-        String now = new Date().toString();
-        String prefix = "TRACER " + now + " ";
+        String now = new Date().toString()
+        String prefix = "TRACER " + now + " "
         System.out.println(prefix + "prizeCard: " + prizeCard
                            + " maxCard: " + maxCard
                            + " mode: " + mode
-                           + " cards: " + cards);
+                           + " cards: " + cards)
 
-        Strategy strategy = new Strategies().getStrategy(mode);
-        // def cardValues = []
-        // cards.each { c -> cardValues << (c as int )}
-        // IntStream hand = cards.stream()
-        int pick = strategy.selectCard(prizeCard, cards, maxCard);
-        String message = now + " OK";
+        Strategy strategy = new Strategies().getStrategy(mode)
+        int pick = strategy.selectCard(prizeCard, cards, maxCard)
+        String message = now + " OK"
 
-        Result result = new Result();
-        result.setCard(pick);
-        result.setMessage(message);
+        def result = new Result(card: pick, message: message)
 
-        return new ResponseEntity<Result>(result, HttpStatus.OK);
+        return new ResponseEntity<Result>(result, HttpStatus.OK)
     }
 }
