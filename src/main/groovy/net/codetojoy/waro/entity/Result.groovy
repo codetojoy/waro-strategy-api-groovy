@@ -2,7 +2,7 @@ package net.codetojoy.waro.entity
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-public class Result {
+class Result {
     @JsonProperty("card")
     int card
 

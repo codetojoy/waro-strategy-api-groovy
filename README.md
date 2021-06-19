@@ -1,5 +1,5 @@
 
-WarO_Strategy_API_Java
+waro-strategy-api-groovy
 =========
 
 * see main project [here](https://github.com/codetojoy/WarO_Java_14.git)

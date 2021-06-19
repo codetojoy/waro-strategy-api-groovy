@@ -1,27 +1,20 @@
-package net.codetojoy.waro.strategy;
+package net.codetojoy.waro.strategy
 
-import static org.junit.Assert.*;
-import java.util.*;
-import org.junit.*;
-
-import java.util.stream.*;
-import static java.util.stream.Collectors.toList;
+import org.junit.jupiter.api.Test
+import static org.junit.Assert.*
 
 public class MaxCardTest {
-
     @Test
     public void testSelectCard() {
-        Strategy strategy = new MaxCard();
-        int maxCard = 50;
-        int prizeCard = 10;
-        int handSize = 20;
-        def hand = (1..handSize+1).collect{ it }.stream()
-        // IntStream hand = IntStream.range(1,handSize+1).boxed().mapToInt(i -> i);
+        Strategy strategy = new MaxCard()
+        int maxCard = 50
+        int prizeCard = 10
+        int handSize = 20
+        def hand = (1..handSize).collect{ it }
 
         // test
-        int result = strategy.selectCard(prizeCard, hand, maxCard);
+        int result = strategy.selectCard(prizeCard, hand, maxCard)
 
-        assertEquals(handSize, result);
+        assertEquals(handSize, result)
     }
-
 }
